@@ -21,7 +21,7 @@ class ContactAdapter (private val onContactClicked: (contactRequestItem)-> Unit)
 
     override fun onBindViewHolder(holder: ContactAdapter.ViewHolder, position: Int) {
         val contact : contactRequestItem = getItem(position)
-        val nombreCompleto = contact.nombre + contact.apellido
+        val nombreCompleto = contact.nombre +" "+ contact.apellido
         holder.binding.tvNombreCompleto.text = nombreCompleto
         holder.binding.ivAvatar.imageUrl(contact.avatar)
         holder.binding.root.setOnClickListener{

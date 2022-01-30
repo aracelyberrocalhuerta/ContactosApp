@@ -77,7 +77,7 @@ class ContactListFragment : Fragment(){
                 ContactListFragmentDirections.actionContactListFragmentToContactAddFragment()
             findNavController().navigate(action)
         }
-        binding.rvContact.layoutManager = GridLayoutManager(context, 2)
+        binding.rvContact.layoutManager = GridLayoutManager(context, 1)
         binding.rvContact.adapter = adapter
     }
 
