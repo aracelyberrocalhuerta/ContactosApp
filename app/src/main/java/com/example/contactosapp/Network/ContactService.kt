@@ -16,7 +16,7 @@ interface ContactService {
     fun getContacts(): Call<List<contactRequestItem>>
 
     @GET("{Id}")
-    fun getContactbyId(@Path("Id") Id: Int,) : Call<Contact>
+    fun getContactbyId(@Path("Id") Id: Int,) : Call<contactRequestItem>
 
     @POST("0")
     fun createContact(@Body contact: ContactRequest) : Call<Any>

@@ -7,16 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.contactosapp.Extensions.imageUrl
-import com.example.contactosapp.Model.Contact
+import com.example.contactosapp.Model.contactRequestItem
 import com.example.contactosapp.Network.ContactApi
 import com.example.contactosapp.databinding.FragmentContactDetailBinding
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import kotlin.reflect.KProperty
 
 class ContactDetailFragment : Fragment(){
     private val args: ContactDetailFragmentArgs by navArgs()
@@ -43,8 +41,8 @@ class ContactDetailFragment : Fragment(){
     }
 
     private fun requestData(contactID: Int) {
-        ContactApi.service.getContactbyId(contactID).enqueue(object : Callback<Contact> {
-            override fun onResponse(call: Call<Contact>, response: Response<Contact>) {
+        ContactApi.service.getContactbyId(contactID).enqueue(object : Callback<contactRequestItem> {
+            override fun onResponse(call: Call<contactRequestItem>, response: Response<contactRequestItem>) {
                 if (response.isSuccessful) {
                     populateUi(response.body())
                 } else {
@@ -55,7 +53,7 @@ class ContactDetailFragment : Fragment(){
                 }
             }
 
-            override fun onFailure(call: Call<Contact>, t: Throwable) {
+            override fun onFailure(call: Call<contactRequestItem>, t: Throwable) {
                 Log.e("requestData", "error", t)
                 showError("Error en la conexión")
             }
@@ -66,7 +64,7 @@ class ContactDetailFragment : Fragment(){
     private fun showError(message: String) {
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
     }
-    private fun populateUi(contact: Contact?) {
+    private fun populateUi(contact: contactRequestItem?) {
         contact?.let {
             val nombreCompleto = it.nombre + it.apellido
             binding.tvNombreCompleto.text = nombreCompleto
